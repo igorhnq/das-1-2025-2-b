@@ -1,26 +1,10 @@
-## Princípio de Substituição de Liskov (LSP)
+- Princípio de Substituição de Liskov (LSP): Objetos de uma superclasse devem ser substituíveis por objetos de suas subclasses sem quebrar a funcionalidade do programa. Isso significa que uma subclasse deve poder ser usada em qualquer lugar onde sua superclasse é esperada, sem alterar o comportamento esperado.
 
-O Princípio de Substituição de Liskov é o terceiro princípio do SOLID, formulado por Barbara Liskov. Estabelece que objetos de uma superclasse devem poder ser substituídos por objetos de suas subclasses sem alterar a funcionalidade do programa.
+- O princípio garante que a herança seja usada corretamente, mantendo a consistência comportamental entre classes pai e filhas. Se uma subclasse não pode substituir completamente sua superclasse, então a relação de herança está mal projetada.
 
-**Definição:** Se S é um subtipo de T, então objetos do tipo T podem ser substituídos por objetos do tipo S sem quebrar as propriedades do programa.
+- Exemplo de violação: Uma classe `Pinguim` que herda de `Ave` mas não pode voar, enquanto a classe `Ave` tem um método `voar()`. Isso viola o LSP porque nem todas as aves podem voar, mas o contrato da superclasse sugere que sim.
 
-### Violações Comuns
-
-- **Fortalecimento de pré-condições:** Quando subclasses impõem restrições mais rigorosas que a classe base.
-- **Enfraquecimento de pós-condições:** Quando subclasses oferecem garantias mais fracas que a classe base.
-- **Lançamento de exceções:** Métodos sobrescritos que lançam exceções não previstas na classe base.
-
-### Exemplos de Violação
-
-- **Retângulo/Quadrado:** Um quadrado que herda de retângulo pode quebrar a expectativa de que largura e altura sejam independentes.
-- **Ave/Pinguim:** Um pinguim que herda de ave mas não consegue voar viola a expectativa do método voar().
-
-### Como Identificar Violações
-
-- Uso de verificações de tipo (instanceof) antes de usar objetos
-- Métodos vazios ou que lançam exceções em subclasses
-- Comportamentos inesperados ao substituir objetos
-
-### Benefícios da Aplicação Correta
-
-O LSP garante que o polimorfismo funcione de forma confiável, facilitando testes, manutenção e extensibilidade do sistema. Promove hierarquias de classes bem projetadas onde as substituições são seguras e previsíveis.
+- Para respeitar o LSP, devemos garantir que:
+  - Pré-condições de métodos da subclasse não sejam mais restritivas que as da superclasse
+  - Pós-condições de métodos da subclasse não sejam mais fracas que as da superclasse
+  - Invariantes da superclasse sejam preservadas na subclasse
